@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TarjeTable - Login</title>
+
+  <!-- Alkatra Regular -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="Estilo/styles.css" />
+</head>
+
+<body>
+  <main class="auth">
+
+    <!-- IZQUIERDA -->
+    <section class="left">
+      <!-- Topo TL -->
+      <svg class="topo topo--tl" viewBox="0 0 600 600" aria-hidden="true">
+        <g class="topo__g">
+          <path d="M70,190 C130,60 320,60 420,120 C520,180 540,290 450,350 C360,410 220,390 140,320 C80,270 40,250 70,190 Z" />
+          <path d="M100,205 C155,95 310,95 395,145 C480,195 495,275 425,325 C350,375 235,360 165,305 C115,265 80,245 100,205 Z" />
+          <path d="M130,220 C175,130 300,130 372,170 C445,210 452,265 400,305 C335,345 250,335 195,295 C152,265 120,245 130,220 Z" />
+          <path d="M160,240 C198,170 290,170 350,200 C410,230 410,265 372,292 C320,325 262,320 220,292 C188,270 150,255 160,240 Z" />
+          <path d="M195,260 C220,220 285,220 325,240 C365,260 365,280 340,295 C305,312 262,310 235,295 C214,283 188,275 195,260 Z" />
+        </g>
+      </svg>
+
+      <div class="left__content">
+        <!-- BRAND -->
+        <div class="brand">
+          <img class="brand__icon" src="Img/LOGO.png" alt="Logo TarjeTable" />
+          <h1 class="brand__name">TarjeT/able</h1>
+        </div>
+
+        <!-- FORM -->
+        <form class="form" autocomplete="on">
+          <!-- Username -->
+          <div class="field field--full">
+            <div class="field__row">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.42 0-8 2-8 4v2h16v-2c0-2-3.58-4-8-4Z"/>
+              </svg>
+
+              <input class="input" type="text" name="username"
+                     placeholder="Cédula / Correo Electrónico / Credencial" />
+            </div>
+            <div class="line"></div>
+          </div>
+
+          <!-- Password -->
+          <div class="field field--full">
+            <div class="field__row">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17 8h-1V6a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v9a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-9a2 2 0 0 0-2-2Zm-7-2a2 2 0 0 1 4 0v2h-4Z"/>
+              </svg>
+
+              <input id="password" class="input" type="password" name="password" placeholder="Contraseña" />
+
+              <button class="eye" type="button" aria-label="Mostrar u ocultar contraseña">
+                <svg class="eye__icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7Zm0 11a4 4 0 1 1 4-4 4 4 0 0 1-4 4Z"/>
+                </svg>
+              </button>
+            </div>
+            <div class="line"></div>
+          </div>
+
+          <!-- Actions: 2 columnas -->
+          <a class="forgot" href="#">Olvidaste las credenciales?</a>
+          <button class="btn" type="submit">Ingresar</button>
+        </form>
+      </div>
+
+      <!-- Topo BR -->
+      <svg class="topo topo--br" viewBox="0 0 600 600" aria-hidden="true">
+        <g class="topo__g">
+          <path d="M520,420 C455,520 315,540 220,495 C120,448 95,330 175,270 C255,210 390,220 465,300 C520,360 550,385 520,420 Z" />
+          <path d="M495,410 C440,485 325,505 245,475 C165,445 150,350 210,305 C270,260 375,265 435,325 C480,370 520,390 495,410 Z" />
+          <path d="M468,400 C420,448 335,465 280,448 C220,430 215,360 255,330 C300,295 370,300 415,338 C448,365 490,385 468,400 Z" />
+          <path d="M438,392 C398,425 345,435 310,425 C272,413 272,372 300,352 C332,330 370,332 398,352 C418,366 455,382 438,392 Z" />
+          <path d="M410,385 C382,405 352,408 332,402 C312,396 315,378 330,366 C350,350 370,352 386,364 C396,372 420,380 410,385 Z" />
+        </g>
+      </svg>
+
+      <div class="powered">
+        <span>Powered by</span>
+        <strong>Morasu</strong>
+      </div>
+    </section>
+
+    <!-- DERECHA -->
+    <section class="right">
+      <img src="Img/FONDOPERSONAS.png" alt="Imagen derecha" />
+    </section>
+
+  </main>
+
+  <script>
+    const eye = document.querySelector(".eye");
+    const pass = document.getElementById("password");
+    if (eye && pass) {
+      eye.addEventListener("click", () => {
+        pass.type = pass.type === "password" ? "text" : "password";
+      });
+    }
+  </script>
+</body>
+</html>
