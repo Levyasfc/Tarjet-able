@@ -1,95 +1,178 @@
-:root{
+:root {
+  /* Colores mockup */
   --bg: #DAD5D3;
   --blue1: #227C9D;
   --blue2: #19586F;
   --black: #051014;
+
+  /* SPLIT exacto tipo mockup */
+  --leftW: 62.5vw;
+  --rightW: 37.5vw;
+
+  /* ZONA CENTRAL (Ajustes de alineación) */
+  --centerLeftPadding: 90px;
+  --centerTop: 50%;
+
+  /* Logo */
+  --logoIcon: 192px;
+  --logoText: 55px;
+
+  /* Botón */
+  --btnW: 280px;
+  --btnH: 38px;
+
+  /* ===== AJUSTE DE LOS TOPOS (FONDO) ===== */
+  --topoOpacity: .8;
+  --topoTLW: 550px;
+
+  /* CORRECCIÓN AQUÍ: */
+  /* Antes estaba en -520px y -360px (muy escondido). */
+  /* Los ponemos menos negativos para que la imagen "entre" en la pantalla */
+  --topoTLX: -30px; 
+  --topoTLY: -20px;
+
+  /* Ajuste del topo inferior por si acaso */
+  --topoBRW: 750px;
+  --topoBRX: auto;
 }
 
-*{ box-sizing:border-box; }
-html, body{ height:100%; }
+* { box-sizing: border-box; }
+html, body { height: 100%; }
 
-body{
-  margin:0;
+body {
+  margin: 0;
   background: var(--bg);
   color: var(--black);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
-.auth{
+/* Layout */
+.page {
   width: 100vw;
   height: 100vh;
-  display:grid;
-  grid-template-columns: 1.25fr 1fr;
+  display: flex;
+  overflow: hidden;
   background: var(--bg);
-  overflow:hidden;
 }
 
-/* LEFT */
-.left{
-  position:relative;
-  overflow:hidden;
-  padding: clamp(18px, 2.6vw, 44px);
-  display:flex;
-  align-items:center;
+.panel {
+  position: relative;
+  overflow: hidden;
 }
 
-.left__content{
-  width: min(1020px, 100%);
-  display:grid;
-  grid-template-columns: 1fr 1.25fr;
-  align-items:center;
-  gap: clamp(26px, 4vw, 96px);
+.panel--left {
+  width: var(--leftW);
+  min-width: 880px;
+  background: var(--bg);
 }
 
-/* BRAND */
-.brand{
-  display:flex;
-  align-items:center;
-  gap: 22px;
+.panel--right {
+  width: var(--rightW);
+  flex: 1;
 }
 
-/* IMPORTANTE: sin rotación, respeta el PNG tal cual */
-.brand__icon{
-  width: 90px;
-  height: 90px;
+/* Imagen derecha */
+.hero {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* ===== Topos (fondo) ===== */
+.topo {
+  position: absolute;
+  height: auto;
+  pointer-events: none;
+  opacity: var(--topoOpacity);
+  z-index: 0;
+}
+
+.topo--tl {
+  width: var(--topoTLW);
+  left: var(--topoTLX);
+  top: var(--topoTLY);
+}
+
+.topo--br {
+  position: absolute;
+  width: var(--topoBRW);
+  /* Lo pegamos a la derecha y abajo para que salga de la esquina */
+  right: -300px;  
+  bottom: -20px;
+  /* Anulamos left/top si estaban puestos antes */
+  left: auto;
+  top: auto; 
+  
+  opacity: var(--topoOpacity);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== CenterZone: Alineación flexible ===== */
+.centerZone {
+  position: absolute;
+  left: var(--centerLeftPadding);
+  top: var(--centerTop);
+  transform: translateY(-50%);
+  z-index: 2;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  /* Espacio entre el logo y el formulario */
+  gap: 8vw;
+
+  max-width: calc(100% - (var(--centerLeftPadding) * 2));
+  padding-right: 40px;
+}
+
+/* ===== Brand zone ===== */
+.brandZone {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex: 0 0 auto;
+}
+
+.brandZone__icon {
+  width: var(--logoIcon);
+  height: var(--logoIcon);
   object-fit: contain;
-  transform: none;        /* <- quita giro */
-  rotate: 0deg;           /* <- por si el navegador aplica rotate */
+  transform: none;
 }
 
-.brand__name{
-  margin:0;
+.brandZone__name {
+  margin: 0;
   font-family: "Alkatra", system-ui, sans-serif;
   font-weight: 400;
-  font-size: clamp(46px, 4.4vw, 66px);
+  font-size: var(--logoText);
   color: var(--blue1);
   letter-spacing: .2px;
+  line-height: 1;
 }
 
-/* FORM (2 columnas) */
-.form{
-  width: min(600px, 100%);
-  display:grid;
-
-  /* Col 1 para el link / col 2 GRANDE para botón ancho */
-  grid-template-columns: 1fr 280px;
-
-  column-gap: 18px;
-  row-gap: 18px;
-  align-items:center;
+/* ===== Login zone ===== */
+.loginZone {
+  flex: 1;
+  max-width: 480px;
+  min-width: 300px;
 }
 
-.field--full{ grid-column: 1 / -1; }
+/* Campos */
+.field { margin-bottom: 18px; }
 
-.field__row{
-  display:flex;
-  align-items:center;
+.field__row {
+  display: flex;
+  align-items: center;
   gap: 10px;
-  padding: 2px 0;
-  position:relative;
+  position: relative;
+  width: 100%; 
 }
 
-.icon{
+.icon {
   width: 15px;
   height: 15px;
   fill: var(--blue1);
@@ -97,165 +180,116 @@ body{
   flex: 0 0 auto;
 }
 
-.input{
-  width: 100%;
+.input {
+  flex: 1;      
+  width: auto; 
   border: none;
   outline: none;
   background: transparent;
   font-size: 12px;
   color: var(--blue2);
-  padding: 10px 42px 10px 0;
+  padding: 12px 0;
 }
 
-.input::placeholder{
+.input::placeholder {
   color: var(--blue2);
   opacity: .85;
 }
 
-.line{
+.line {
   height: 2px;
-  width: 100%;
+  width: 100%; 
   background: var(--blue1);
   opacity: .9;
+  margin-top: 2px;
 }
 
-/* OJO */
-.eye{
-  position:absolute;
+/* ojo */
+.eye {
+  position: absolute;
   right: -6px;
   top: 50%;
   transform: translateY(-50%);
-  border:none;
+  border: none;
   background: transparent;
-  cursor:pointer;
+  cursor: pointer;
   padding: 6px;
 }
-
-.eye__icon{
+.eye__icon {
   width: 18px;
   height: 18px;
   fill: var(--blue1);
   opacity: .85;
 }
 
-/* LINK col 1 */
-.forgot{
-  grid-column: 1 / 2;
+/* Acciones */
+.actions {
+  display: grid;
+  grid-template-columns: 1fr var(--btnW);
+  gap: 18px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.forgot {
   font-size: 11px;
   color: var(--blue2);
-  text-decoration:none;
-  align-self:center;
+  text-decoration: none;
   white-space: nowrap;
 }
-.forgot:hover{ text-decoration: underline; }
+.forgot:hover { text-decoration: underline; }
 
-/* BOTÓN col 2: ANCHO como el mockup */
-.btn{
-  grid-column: 2 / 3;
-  justify-self: stretch;  /* <- se estira en su columna */
-  width: 100%;            /* <- ocupa toda la columna */
-
-  background: var(--blue2);
-  color: white;
+.btn {
+  width: var(--btnW);
+  height: var(--btnH);
   border: none;
-
-  padding: 12px 24px;     /* más alto y más ancho */
-  border-radius: 999px;   /* pill */
+  border-radius: 999px;
+  background: var(--blue2);
+  color: #fff;
   font-size: 12px;
-  font-weight: 700;
-  cursor:pointer;
+  font-weight: 800;
+  cursor: pointer;
 }
-.btn:hover{ filter: brightness(1.05); }
+.btn:hover { filter: brightness(1.05); }
 
-/* RIGHT IMAGE */
-.right{ overflow:hidden; }
-.right img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  display:block;
-}
-
-/* TOPO */
-.topo{
-  position:absolute;
-  width: 520px;
-  height: 520px;
-  pointer-events:none;
-  opacity: .75;
-}
-.topo path{
-  fill:none;
-  stroke: var(--blue1);
-  stroke-width: 2.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.topo--tl{ left:-160px; top:-190px; }
-.topo--br{ right:-190px; bottom:-170px; opacity:.7; }
-
-.topo__g{
-  transform-origin:center;
-  animation: drift 9s ease-in-out infinite;
-}
-@keyframes drift{
-  0%{ transform: translate(0,0); }
-  50%{ transform: translate(10px,-6px); }
-  100%{ transform: translate(0,0); }
-}
-
-/* Powered */
-.powered{
-  position:absolute;
-  right: 44px;
-  bottom: 28px;
-  text-align:right;
+/* Footer */
+.footerZone {
+  position: absolute;
+  right: 56px;
+  bottom: 32px;
+  z-index: 2;
   font-size: 13px;
+  text-align: right;
 }
-.powered span{
+
+.footerZone span {
   color: var(--black);
   opacity: .7;
   margin-right: 8px;
 }
-.powered strong{
+.footerZone strong {
   color: var(--blue1);
   font-weight: 800;
 }
 
 /* Responsive */
-@media (max-width: 980px){
-  .auth{
-    grid-template-columns: 1fr;
-    height: auto;
-    min-height: 100vh;
+@media (max-width: 1100px) {
+  .page { flex-direction: column; height: auto; min-height: 100vh; }
+  .panel--left { width: 100%; min-width: 0; height: 720px; }
+  .panel--right { width: 100%; height: 360px; }
+
+  .centerZone {
+    left: 20px;
+    right: 20px;
+    max-width: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
   }
-
-  .right{ height: 340px; }
-
-  .left{ align-items:flex-start; }
-
-  .left__content{
-    grid-template-columns: 1fr;
-    gap: 22px;
-    padding-top: 26px;
-  }
-
-  .form{
-    grid-template-columns: 1fr;
-  }
-
-  .forgot, .btn, .field--full{
-    grid-column: 1 / -1;
-  }
-
-  .btn{
-    width: 100%;
-    justify-self: stretch;
-  }
-
-  .powered{
-    right: 18px;
-    bottom: 14px;
-  }
+  
+  .brandZone { margin-bottom: 20px; }
+  .loginZone { width: 100%; max-width: none; }
+  .actions { grid-template-columns: 1fr; }
+  .btn { width: 100%; }
+  .footerZone { right: 18px; bottom: 14px; }
 }
